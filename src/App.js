@@ -9,7 +9,7 @@ import { CreateTodoButton } from './CreateTodoButton';
 const defaultTodos = [
   { text: 'Cortar pasto', completed: true },
   { text: 'Tomar el cursso de intro a React', completed: false },
-  { text: 'Tomar curso de Ingles', completed: false },
+  { text: 'Tomar curso de Ingles', completed: true },
   { text: 'Llamar novia', completed: false },
 ];
 
@@ -32,6 +32,21 @@ function App() {
     });
   }
 
+  // Create Functions
+  // Arrow functions
+  const completeTodos = (text) => {
+
+
+    // Condition to identify index
+    const todoIndex = todos.findIndex( todo => todo.text === text );
+    /// ... Split operator
+    const newTodos =[ ...todos];
+    newTodos[todoIndex].completed=true;
+    // Componentes Re-render
+    setTodos(newTodos);
+
+  };
+
   return (
     <React.Fragment>
       <TodoCounter
@@ -51,6 +66,7 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={ ()=>completeTodos(todo.text)}
           />
         ))}
 
