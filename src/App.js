@@ -34,9 +34,7 @@ function App() {
 
   // Create Functions
   // Arrow functions
-  const completeTodos = (text) => {
-
-
+  const completeTodo = (text) => {
     // Condition to identify index
     const todoIndex = todos.findIndex( todo => todo.text === text );
     /// ... Split operator
@@ -44,9 +42,15 @@ function App() {
     newTodos[todoIndex].completed=true;
     // Componentes Re-render
     setTodos(newTodos);
-
   };
 
+  const deleteTodo = (text) =>{
+    const todoIndex = todos.findIndex( todo => todo.text == text);
+    const newTodos=[ ...todos];
+    newTodos.splice(todoIndex,1);
+  
+    setTodos(newTodos);
+  }
   return (
     <React.Fragment>
       <TodoCounter
@@ -66,7 +70,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
-            onComplete={ ()=>completeTodos(todo.text)}
+            onComplete={ ()=>completeTodo(todo.text)}
+            onDelete={ ()=> deleteTodo(todo.text)} 
           />
         ))}
 
